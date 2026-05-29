@@ -1,0 +1,16 @@
+======================
+Troubadeck Information
+======================
+
+== SONG INFO AND IMPLEMENTATION ==
+
+All of the songs included are the same length and have the same instrument arrangement. The only difference between them is the chord progressions. This leads to some interesting possible implementations with dynamic audio. You could possibly chain various songs together to create longer custom "songs", or have the songs change with the mood of the project you're working on. I'm excited to see what you do with them!
+
+
+
+== ABOUT THE TROUBADECK ==
+
+The Troubadeck is a deck of cards, each containing a different chord progression. They are designed to be an inspirational tool for composers and music producers. They were created by musician and game designer Charlie McCarron.
+
+More information can be found here: https://troubadeck.com
+
