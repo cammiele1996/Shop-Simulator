@@ -43,7 +43,11 @@ public class PlayerController : MonoBehaviour
     // Controls the range a player can interact with an object in the game world
     public float interactionRange;
 
+    // References our hold point empty
     public Transform holdPoint;
+
+    // Controls our player throw force
+    public float throwForce;
 
 
 
@@ -140,34 +144,42 @@ public class PlayerController : MonoBehaviour
         Ray ray = theCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit; // Local variable to control raycast hit
 
-        // Checks to see if left mouse is clicked
-        if(Mouse.current.leftButton.wasPressedThisFrame)
+
+        if (heldPickup == null) // Determines if an object is already being held
         {
-            // If the ray hits within the interaction range and is stock, handle the following logic
-            if (Physics.Raycast(ray, out hit, interactionRange, whatIsStock))
+
+            // Checks to see if left mouse is clicked
+            if (Mouse.current.leftButton.wasPressedThisFrame)
             {
-                //Debug.Log("I see a pickup");
+                // If the ray hits within the interaction range and is stock, handle the following logic
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsStock))
+                {
+                    //Debug.Log("I see a pickup");
 
-                heldPickup = hit.collider.gameObject; // Assigns object to the player
-                heldPickup.transform.SetParent(holdPoint); // Sets the transformation to Hold Point empty in Unity
-                heldPickup.transform.localPosition = Vector3.zero; // Vector3.zero sets position to (0,0,0)
-                heldPickup.transform.localRotation = Quaternion.identity; // Same as Vector3.zero for rotation
+                    heldPickup = hit.collider.gameObject; // Assigns object to the player
+                    heldPickup.transform.SetParent(holdPoint); // Sets the transformation to Hold Point empty in Unity
+                    heldPickup.transform.localPosition = Vector3.zero; // Vector3.zero sets position to (0,0,0)
+                    heldPickup.transform.localRotation = Quaternion.identity; // Same as Vector3.zero for rotation
 
-                heldPickup.GetComponent<Rigidbody>().isKinematic = true; // Allows object to be held
+                    heldPickup.GetComponent<Rigidbody>().isKinematic = true; // Allows object to be held
+                }
+
             }
-
         }
-
-        // Checks to see if right mouse is clicked
-        if(Mouse.current.rightButton.wasPressedThisFrame)
+        else
         {
-            heldPickup.GetComponent<Rigidbody>().isKinematic = false; // Disables Kinematics to drop object
+            // Checks to see if right mouse is clicked
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                Rigidbody pickupRB = heldPickup.GetComponent<Rigidbody>(); // Creates a reference to the objects Rigidbody
+                pickupRB.isKinematic = false; // Disables kinematics on object (Removes our hold ability)
+                pickupRB.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
 
-            heldPickup.transform.SetParent(null); // Removes hold point parent
-            heldPickup = null; // Unassigns object from the player
-        
+                heldPickup.transform.SetParent(null); // Removes hold point parent
+                heldPickup = null; // Unassigns object from the player
+
+            }
         }
-
 
     }
 }
