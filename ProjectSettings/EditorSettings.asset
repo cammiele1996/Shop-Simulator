@@ -47,6 +47,6 @@ EditorSettings:
   m_CacheServerValidationMode: 2
   m_CacheServerDownloadBatchSize: 128
   m_EnableEnlightenBakedGI: 0
-  m_ReferencedClipsExactNaming: 1
+  m_ReferencedClipsExactNaming: 0
   m_ForceAssetUnloadAndGCOnSceneLoad: 1
   m_HideBuildProfileClassicPlatforms: 0
