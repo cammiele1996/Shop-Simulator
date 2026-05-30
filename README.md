@@ -3,7 +3,9 @@ A first-person shop management simulator built in Unity 6 with C#.
 This project is being developed as part of a Udemy Unity course and serves as the foundational learning ground for a larger original game — Merchant's Way: A Peasant's Tale.
 
 About
+
 CURRENTLY IN LOGIC TESTING STATE
+
 The goal of this repo is to learn Unity's core systems through a hands-on store simulator project, including:
 
 Inventory and item management
