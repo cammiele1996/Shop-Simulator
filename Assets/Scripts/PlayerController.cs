@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     // Creates a dropdown in Unity to assign a layer to this variable
     public LayerMask whatIsStock;
 
+    public LayerMask whatIsShelf;
+
     // Controls the range a player can interact with an object in the game world
     public float interactionRange;
 
@@ -168,6 +170,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
+            if(Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                {
+                    Debug.Log("Can place here");
+                }
+
+            }
+
             // Checks to see if right mouse is clicked
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
