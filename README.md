@@ -24,4 +24,4 @@ Version Control: Git + Git LFS
 
 Related Project
 The systems built here are being applied to an original game in development:
-📜 Merchant's Way: A Peasant's Tale — A brutal, comedic first-person medieval shop simulator where you start as a penniless peasant and build a merchant empire from the ground up. See the GDD in this repo for the full design doc.
+📜 Merchant's Way: A Peasant's Tale — A brutal, comedic first-person medieval shop simulator where you start as a penniless peasant and build a merchant empire from the ground up.
