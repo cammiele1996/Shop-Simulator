@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour
     // Controls horizontal and vertical rotation
     private float horiRot, vertRot;
 
-    private GameObject heldPickup;
+    // Controls pickup held by player
+    private StockObject heldPickup;
 
 
 
@@ -158,39 +159,42 @@ public class PlayerController : MonoBehaviour
                 {
                     //Debug.Log("I see a pickup");
 
-                    heldPickup = hit.collider.gameObject; // Assigns object to the player
-                    heldPickup.transform.SetParent(holdPoint); // Sets the transformation to Hold Point empty in Unity
-                    heldPickup.transform.localPosition = Vector3.zero; // Vector3.zero sets position to (0,0,0)
-                    heldPickup.transform.localRotation = Quaternion.identity; // Same as Vector3.zero for rotation
+                    heldPickup = hit.collider.GetComponent<StockObject>();
+                    heldPickup.transform.SetParent(holdPoint);
+                    heldPickup.Pickup();
 
-                    heldPickup.GetComponent<Rigidbody>().isKinematic = true; // Allows object to be held
+
+                }
+            }
+        }
+
+        else
+        {
+
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                {
+
+                    heldPickup.MakePlaced();
+
+                    heldPickup.transform.SetParent(hit.transform);
+                    heldPickup = null;
+
                 }
 
             }
         }
-        else
+
+        // Checks to see if right mouse is clicked
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
+            heldPickup.Release();   // Remove kinematics
+            heldPickup.rigBod.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
 
-            if(Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
-                {
-                    Debug.Log("Can place here");
-                }
+            heldPickup.transform.SetParent(null); // Removes hold point parent
+            heldPickup = null; // Unassigns object from the player
 
-            }
-
-            // Checks to see if right mouse is clicked
-            if (Mouse.current.rightButton.wasPressedThisFrame)
-            {
-                Rigidbody pickupRB = heldPickup.GetComponent<Rigidbody>(); // Creates a reference to the objects Rigidbody
-                pickupRB.isKinematic = false; // Disables kinematics on object (Removes our hold ability)
-                pickupRB.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
-
-                heldPickup.transform.SetParent(null); // Removes hold point parent
-                heldPickup = null; // Unassigns object from the player
-
-            }
         }
 
     }
