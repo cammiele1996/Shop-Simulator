@@ -148,38 +148,42 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit; // Local variable to control raycast hit
 
 
-        if (heldPickup == null) // Determines if an object is already being held
-        {
+        if (heldPickup == null) // Determines if an object is being held by the player
+        {                       // Only executes if player is NOT holding an object
 
             // Checks to see if left mouse is clicked
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
-                // If the ray hits within the interaction range and is stock, handle the following logic
+                // If the ray hits an object within the interaction range and is stock, pickup that object
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsStock))
                 {
                     //Debug.Log("I see a pickup");
 
-                    heldPickup = hit.collider.GetComponent<StockObject>();
-                    heldPickup.transform.SetParent(holdPoint);
-                    heldPickup.Pickup();
+                    heldPickup = hit.collider.GetComponent<StockObject>(); // Sets the held pickup to the collider that was hit
+                    heldPickup.transform.SetParent(holdPoint);  // Sets the transform of the held pickup to be a parent of our hold point empty
+                    heldPickup.Pickup();    // Executes pickup function
 
 
                 }
             }
         }
 
-        else
+        else    // Executes if a pickup is being held by the player
         {
 
+            // Checks to see if left mouse is clicked
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
+                // If the object hit by the ray is a shelf, place the held item 
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
                 {
 
-                    heldPickup.MakePlaced();
+                    hit.collider.GetComponent<ShelfSpaceController>().PlaceStock(heldPickup);
 
-                    heldPickup.transform.SetParent(hit.transform);
-                    heldPickup = null;
+                    if(heldPickup.isPlaced == true)
+                    {
+                        heldPickup = null;
+                    }
 
                 }
 

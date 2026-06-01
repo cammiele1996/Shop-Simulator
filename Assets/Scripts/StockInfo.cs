@@ -6,10 +6,10 @@ public class StockInfo
 {
     public string name;
 
-   public enum StockType
+   public enum StockType    // enum = list (from what I understand)
     {
         cereal, bigDrink, chipsTube, fruit, fruitLarge
     }
 
-    public StockType typeOfStock;
+    public StockType typeOfStock;   // Allows us to assign stock type in the editor
 }
