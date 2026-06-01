@@ -166,6 +166,20 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                {
+                    heldPickup = hit.collider.GetComponent<ShelfSpaceController>().GetStock();
+
+                    if(heldPickup != null)
+                    {
+                        heldPickup.transform.SetParent(holdPoint);
+                        heldPickup.Pickup(); 
+                    }
+                }
+            }
         }
 
         else    // Executes if a pickup is being held by the player
@@ -188,17 +202,17 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-        }
 
-        // Checks to see if right mouse is clicked
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            heldPickup.Release();   // Remove kinematics
-            heldPickup.rigBod.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
+            // Checks to see if right mouse is clicked
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                heldPickup.Release();   // Remove kinematics
+                heldPickup.rigBod.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
 
-            heldPickup.transform.SetParent(null); // Removes hold point parent
-            heldPickup = null; // Unassigns object from the player
+                heldPickup.transform.SetParent(null); // Removes hold point parent
+                heldPickup = null; // Unassigns object from the player
 
+            }
         }
 
     }

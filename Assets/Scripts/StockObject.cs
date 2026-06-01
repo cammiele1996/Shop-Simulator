@@ -13,6 +13,9 @@ public class StockObject : MonoBehaviour
     // Reference to our stock objects rigid body
     public Rigidbody rigBod;
 
+    // Reference to our stock objects collider
+    public Collider col;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,6 +47,8 @@ public class StockObject : MonoBehaviour
         isPlaced = false;   // Ensures that our object is no longer considered placed, even if it wasn't before
                             // i.e. A object was thrown onto the ground and picked back up again
 
+         col.enabled = false;
+
     }
 
     // Handles stock object placement
@@ -53,11 +58,15 @@ public class StockObject : MonoBehaviour
 
         isPlaced = true;            // Sets objects placement to true
 
+        col.enabled = false;
+
 
     }
 
     public void Release()
     {
         rigBod.isKinematic = false; // Removes object's rigid body's kinematics
+
+        col.enabled = true;
     }
 }

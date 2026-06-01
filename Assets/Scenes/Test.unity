@@ -412,6 +412,12 @@ MonoBehaviour:
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 246660681}
+  col: {fileID: 246660687}
+--- !u!64 &246660687 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 4253854849728908177, guid: 935ad6444eeefeb49a9d04ed1a06c04b, type: 3}
+  m_PrefabInstance: {fileID: 1110431418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +720,12 @@ MonoBehaviour:
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 395077085}
+  col: {fileID: 395077090}
+--- !u!64 &395077090 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 6697138710018895458, guid: ed5f12108aa84584b9c48375cbc91c81, type: 3}
+  m_PrefabInstance: {fileID: 1597087935}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,7 +922,7 @@ MonoBehaviour:
   info:
     name: 
     typeOfStock: 0
-  amountOnShelf: 0
+  objectsOnShelf: []
 --- !u!1 &526485838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1625,12 @@ MonoBehaviour:
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 1106760453}
+  col: {fileID: 1106760458}
+--- !u!64 &1106760458 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 6697138710018895458, guid: ed5f12108aa84584b9c48375cbc91c81, type: 3}
+  m_PrefabInstance: {fileID: 1994656032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1108113218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1909,6 +1927,12 @@ MonoBehaviour:
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 1174631936}
+  col: {fileID: 1174631941}
+--- !u!64 &1174631941 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 4253854849728908177, guid: 935ad6444eeefeb49a9d04ed1a06c04b, type: 3}
+  m_PrefabInstance: {fileID: 1172967814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1209071616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2029,6 +2053,12 @@ MonoBehaviour:
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 1408247847}
+  col: {fileID: 1408247852}
+--- !u!64 &1408247852 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 4253854849728908177, guid: 935ad6444eeefeb49a9d04ed1a06c04b, type: 3}
+  m_PrefabInstance: {fileID: 656848506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1413640881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2213,12 @@ MonoBehaviour:
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 1439191756}
+  col: {fileID: 1439191761}
+--- !u!64 &1439191761 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 6697138710018895458, guid: ed5f12108aa84584b9c48375cbc91c81, type: 3}
+  m_PrefabInstance: {fileID: 190337122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1515996364
 GameObject:
   m_ObjectHideFlags: 0
