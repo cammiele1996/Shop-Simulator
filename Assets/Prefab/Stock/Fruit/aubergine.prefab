@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Eggplant
+    price: 2
     typeOfStock: 3
   moveSpeed: 5
   isPlaced: 0

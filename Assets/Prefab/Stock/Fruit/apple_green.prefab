@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Apple
+    price: 1.75
     typeOfStock: 3
   moveSpeed: 5
   isPlaced: 0

@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Whole Watermelon
+    price: 8.72
     typeOfStock: 4
   moveSpeed: 5
   isPlaced: 0

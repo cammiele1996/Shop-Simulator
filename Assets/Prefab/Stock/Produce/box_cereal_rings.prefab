@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Rings Cereal
+    price: 5
     typeOfStock: 0
   moveSpeed: 5
   isPlaced: 0

@@ -5,8 +5,9 @@ using UnityEngine;
 public class StockInfo
 {
     public string name;
+    public float price;
 
-   public enum StockType    // enum = list (from what I understand)
+    public enum StockType    // enum = list (from what I understand)
     {
         cereal, bigDrink, tubeChips, fruit, fruitLarge
     }

@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Pineapple
+    price: 7.5
     typeOfStock: 4
   moveSpeed: 5
   isPlaced: 0

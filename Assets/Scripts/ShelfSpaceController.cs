@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShelfSpaceController : MonoBehaviour
@@ -6,16 +7,18 @@ public class ShelfSpaceController : MonoBehaviour
     // Controls stock object information
     public StockInfo info;
 
-    // List controlling objects on shelf
+    // Lists controlling objects on shelf
     public List<StockObject> objectsOnShelf;
-
     public List<Transform> bigDrinkPoints, cerealPoints, tubeChipPoints, fruitPoints, largeFruitPoints;
+
+    // Reference to UI Canvas TMP Text
+    public TMP_Text shelfLabel;
 
     // Handles stock placement
     public void PlaceStock(StockObject objectToPlace)
     {
 
-        // Declares a temporary bool that controls whether or not we can place the item
+        // Declares a temporary bool that controls whether or not we can place the held stock object
         // Default is true
         bool preventPlacing = true;
 
@@ -24,20 +27,23 @@ public class ShelfSpaceController : MonoBehaviour
          if(objectsOnShelf.Count == 0)
         {
             
-            info = objectToPlace.info;  // Sets the name of the object on the shelf to the name of the object
-            preventPlacing = false;
+            info = objectToPlace.info;  // Sets the name of the object on the shelf to the name of the object being placed
+            preventPlacing = false;     // Allows items to be placed on this shelf
 
         
         } else  // Exectues if there are items on the shelf
         {
 
+            // If the name of the object to place is the same as the object on the shelf
             if(info.name == objectToPlace.info.name)
             {
                 preventPlacing = false;
 
+                // Switch to determine the type of stock that is on the shelf
+                // Each IF statement says that if the shelf is full, then prevent placement
                 switch(info.typeOfStock)
                 {
-                    case StockInfo.StockType.bigDrink:
+                    case StockInfo.StockType.bigDrink:                      // Big Drink
 
                         if (objectsOnShelf.Count >= bigDrinkPoints.Count)
                         {
@@ -46,7 +52,7 @@ public class ShelfSpaceController : MonoBehaviour
 
                         break;
 
-                    case StockInfo.StockType.cereal:
+                    case StockInfo.StockType.cereal:                        // Cereal
 
                         if (objectsOnShelf.Count >= cerealPoints.Count)
                         {
@@ -55,7 +61,7 @@ public class ShelfSpaceController : MonoBehaviour
 
                         break;
 
-                    case StockInfo.StockType.tubeChips:
+                    case StockInfo.StockType.tubeChips:                     // Chips
 
                         if (objectsOnShelf.Count >= tubeChipPoints.Count)
                         {
@@ -64,8 +70,8 @@ public class ShelfSpaceController : MonoBehaviour
 
                         break;
 
-                    case StockInfo.StockType.fruit:
-
+                    case StockInfo.StockType.fruit:                         // Fruit
+                           
                         if (objectsOnShelf.Count >= fruitPoints.Count)
                         {
                             preventPlacing = true;
@@ -73,7 +79,7 @@ public class ShelfSpaceController : MonoBehaviour
 
                         break;
 
-                    case StockInfo.StockType.fruitLarge:
+                    case StockInfo.StockType.fruitLarge:                    // Large fruit
 
                         if (objectsOnShelf.Count >= largeFruitPoints.Count)
                         {
@@ -88,11 +94,13 @@ public class ShelfSpaceController : MonoBehaviour
             }
         }
 
+         // If we are allowed to place the stock object, place the object
         if (preventPlacing == false)
         {
             
-            objectToPlace.MakePlaced();
+            objectToPlace.MakePlaced();     // Execute Make Placed function
 
+            // Same switch logic as above, this time setting the parent to the next available point
             switch (info.typeOfStock)
             {
                 case StockInfo.StockType.bigDrink:
@@ -127,20 +135,31 @@ public class ShelfSpaceController : MonoBehaviour
             }
 
             objectsOnShelf.Add(objectToPlace);
+
+            shelfLabel.text = "$" + objectsOnShelf[0].info.price.ToString("F2");
+
         }
 
     }
 
+    // Handles removing stock from shelves
     public StockObject GetStock()
     {
-        StockObject objectToReturn = null;
+        StockObject objectToReturn = null;      // Holds the stock object to be removed
 
+        // This function is only ran IF the shelf has something on it
         if (objectsOnShelf.Count > 0)
         {
-            objectToReturn = objectsOnShelf[objectsOnShelf.Count - 1];
+            objectToReturn = objectsOnShelf[objectsOnShelf.Count - 1];     // Removes the object internally
 
-            objectsOnShelf.RemoveAt(objectsOnShelf.Count - 1);
+            objectsOnShelf.RemoveAt(objectsOnShelf.Count - 1);      // Removes the object in the same order it was put on
         }
-        return objectToReturn;
+
+        if(objectsOnShelf.Count == 0)
+        {
+            shelfLabel.text = string.Empty;
+        }
+
+        return objectToReturn;  // Returns the object to the player
     }
 }

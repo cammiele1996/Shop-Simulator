@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Cheddar Chips
+    price: 2
     typeOfStock: 2
   moveSpeed: 5
   isPlaced: 0

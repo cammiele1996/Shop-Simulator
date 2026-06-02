@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Orange Drink
+    price: 3
     typeOfStock: 1
   moveSpeed: 5
   isPlaced: 0
