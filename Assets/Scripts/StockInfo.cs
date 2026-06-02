@@ -8,7 +8,7 @@ public class StockInfo
 
    public enum StockType    // enum = list (from what I understand)
     {
-        cereal, bigDrink, chipsTube, fruit, fruitLarge
+        cereal, bigDrink, tubeChips, fruit, fruitLarge
     }
 
     public StockType typeOfStock;   // Allows us to assign stock type in the editor

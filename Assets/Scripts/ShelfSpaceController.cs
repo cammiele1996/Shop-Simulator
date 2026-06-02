@@ -35,10 +35,55 @@ public class ShelfSpaceController : MonoBehaviour
             {
                 preventPlacing = false;
 
-                if (objectsOnShelf.Count >= bigDrinkPoints.Count)
+                switch(info.typeOfStock)
                 {
-                    preventPlacing = true;
+                    case StockInfo.StockType.bigDrink:
+
+                        if (objectsOnShelf.Count >= bigDrinkPoints.Count)
+                        {
+                            preventPlacing = true;
+                        }
+
+                        break;
+
+                    case StockInfo.StockType.cereal:
+
+                        if (objectsOnShelf.Count >= cerealPoints.Count)
+                        {
+                            preventPlacing = true;
+                        }
+
+                        break;
+
+                    case StockInfo.StockType.tubeChips:
+
+                        if (objectsOnShelf.Count >= tubeChipPoints.Count)
+                        {
+                            preventPlacing = true;
+                        }
+
+                        break;
+
+                    case StockInfo.StockType.fruit:
+
+                        if (objectsOnShelf.Count >= fruitPoints.Count)
+                        {
+                            preventPlacing = true;
+                        }
+
+                        break;
+
+                    case StockInfo.StockType.fruitLarge:
+
+                        if (objectsOnShelf.Count >= largeFruitPoints.Count)
+                        {
+                            preventPlacing = true;
+                        }
+
+                        break;
                 }
+
+                
 
             }
         }
@@ -47,7 +92,39 @@ public class ShelfSpaceController : MonoBehaviour
         {
             
             objectToPlace.MakePlaced();
-            objectToPlace.transform.SetParent(bigDrinkPoints[objectsOnShelf.Count]);
+
+            switch (info.typeOfStock)
+            {
+                case StockInfo.StockType.bigDrink:
+
+                    objectToPlace.transform.SetParent(bigDrinkPoints[objectsOnShelf.Count]);
+
+                    break;
+
+                case StockInfo.StockType.cereal:
+
+                    objectToPlace.transform.SetParent(cerealPoints[objectsOnShelf.Count]);
+
+                    break;
+
+                case StockInfo.StockType.tubeChips:
+
+                    objectToPlace.transform.SetParent(tubeChipPoints[objectsOnShelf.Count]);
+
+                    break;
+
+                case StockInfo.StockType.fruit:
+
+                    objectToPlace.transform.SetParent(fruitPoints[objectsOnShelf.Count]);
+
+                    break;
+
+                case StockInfo.StockType.fruitLarge:
+
+                    objectToPlace.transform.SetParent(largeFruitPoints[objectsOnShelf.Count]);
+
+                    break;
+            }
 
             objectsOnShelf.Add(objectToPlace);
         }

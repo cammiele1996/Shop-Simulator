@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
     name: Lettuce
-    typeOfStock: 3
+    typeOfStock: 4
   moveSpeed: 5
   isPlaced: 0
   rigBod: {fileID: 1997372335742306656}
