@@ -20,7 +20,7 @@ public class StockObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        info = StockInfoController.instance.GetInfo(info.name);
     }
 
     // Update is called once per frame
