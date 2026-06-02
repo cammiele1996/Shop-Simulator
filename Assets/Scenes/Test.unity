@@ -3290,8 +3290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384380102}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76534, y: 0.5, z: 4.30428}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.51703, y: -0.76793003, z: -1.9056501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3321,7 +3321,7 @@ Transform:
   - {fileID: 1777173349}
   - {fileID: 1619422143}
   - {fileID: 34566271}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1074562061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &393502057 stripped
 Transform:
@@ -3685,6 +3685,7 @@ MonoBehaviour:
   info:
     name: 
     price: 0
+    stockObject: {fileID: 0}
     typeOfStock: 0
   objectsOnShelf: []
   bigDrinkPoints:
@@ -4076,6 +4077,120 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5903496337434556221, guid: a01b3ae9dbbf4464ca1fc76fe27aecb8, type: 3}
   m_PrefabInstance: {fileID: 953074676}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &444552240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444552242}
+  - component: {fileID: 444552241}
+  m_Layer: 0
+  m_Name: StockInfoController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &444552241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444552240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234e05d63ab27834db984710294dbf50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StockInfoController
+  foodInfo:
+  - name: Apple
+    price: 1.75
+    stockObject: {fileID: 379374499040087938, guid: edeb941c4e01bf64e9eab5c1deec2fec, type: 3}
+    typeOfStock: 3
+  - name: Eggplant
+    price: 2
+    stockObject: {fileID: 5970602843498867990, guid: 5ace5e5346899f5428cf7c224c49603c, type: 3}
+    typeOfStock: 3
+  - name: Lemon
+    price: 1
+    stockObject: {fileID: 6274309259186787596, guid: b805c2aca449d7a45978bb1aa71efee0, type: 3}
+    typeOfStock: 3
+  - name: Lettuce
+    price: 4.25
+    stockObject: {fileID: 8999229006476214764, guid: fc817bd6c42bf12419fa2f34fa0701d6, type: 3}
+    typeOfStock: 4
+  - name: Pineapple
+    price: 7.5
+    stockObject: {fileID: 1904699996125104852, guid: dbfd4616e79588d45858e6bbc72863be, type: 3}
+    typeOfStock: 4
+  - name: Half Watermelon
+    price: 4.2
+    stockObject: {fileID: 7080979093415522952, guid: 1f57eb69273ad3646a834f2d7d84f868, type: 3}
+    typeOfStock: 4
+  - name: Whole Watermelon
+    price: 8.72
+    stockObject: {fileID: 6215353841943874573, guid: 0db420fedec5da741805c6d318eaa335, type: 3}
+    typeOfStock: 4
+  produceInfo:
+  - name: Cola Drink
+    price: 3
+    stockObject: {fileID: 8801596300070336964, guid: a01b3ae9dbbf4464ca1fc76fe27aecb8, type: 3}
+    typeOfStock: 1
+  - name: Lime Drink
+    price: 3
+    stockObject: {fileID: 3894530787167751511, guid: 60757f94a3022e348818a2c583b05a58, type: 3}
+    typeOfStock: 1
+  - name: Orange Drink
+    price: 3
+    stockObject: {fileID: 2408076546941985552, guid: a6fa9a9b6a562d54b9338e4f0997e2bf, type: 3}
+    typeOfStock: 1
+  - name: Water Drink
+    price: 3
+    stockObject: {fileID: 3250960561890966361, guid: cf209999e7bd54741a2c878e19b27f51, type: 3}
+    typeOfStock: 1
+  - name: Granola Cereal
+    price: 5
+    stockObject: {fileID: 3448238701466486237, guid: fda6776c5072f5742a35d61995755b1e, type: 3}
+    typeOfStock: 0
+  - name: Rings Cereal
+    price: 5
+    stockObject: {fileID: 4266453472209016458, guid: fca8591dd0e866c4088f74360ea246ea, type: 3}
+    typeOfStock: 0
+  - name: BBQ Chips
+    price: 2
+    stockObject: {fileID: 6278568463303046182, guid: 1571d919994afc245831718dd74fef8d, type: 3}
+    typeOfStock: 2
+  - name: Cheddar Chips
+    price: 2
+    stockObject: {fileID: 3210696404501222817, guid: cbc9713db63e6b740b202816e56d63b0, type: 3}
+    typeOfStock: 2
+  - name: Classic Chips
+    price: 2
+    stockObject: {fileID: 4086335324769846748, guid: f1a2016258025c94ca1fceaa09909be5, type: 3}
+    typeOfStock: 2
+  - name: Onion Chips
+    price: 2
+    stockObject: {fileID: 335141194966790903, guid: 44d8df2a1e64c1f45b49a1cc09b2f8fb, type: 3}
+    typeOfStock: 2
+--- !u!4 &444552242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444552240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.24831, y: 1.26793, z: 6.20993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &471975036
 GameObject:
   m_ObjectHideFlags: 0
@@ -8031,6 +8146,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1889804721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1074562060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074562061}
+  m_Layer: 0
+  m_Name: Stock Tables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1074562061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074562060}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.24831, y: 1.26793, z: 6.20993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1351629184}
+  - {fileID: 2139557288}
+  - {fileID: 384380103}
+  - {fileID: 1986877312}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1090451948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5903496337434556221, guid: a01b3ae9dbbf4464ca1fc76fe27aecb8, type: 3}
@@ -9764,7 +9914,7 @@ Transform:
   m_GameObject: {fileID: 1351629183}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5098, y: 0, z: 4.516}
+  m_LocalPosition: {x: 0.26149002, y: -1.26793, z: -1.6939301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9790,7 +9940,7 @@ Transform:
   - {fileID: 170805325}
   - {fileID: 379325822}
   - {fileID: 1728775397}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1074562061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1352372741
 PrefabInstance:
@@ -13363,8 +13513,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986877311}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76534, y: 0.5, z: 4.30428}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.51703, y: -0.76793003, z: -1.9056501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13413,7 +13563,7 @@ Transform:
   - {fileID: 1195587428}
   - {fileID: 881760183}
   - {fileID: 955444006}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1074562061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1987658955 stripped
 Transform:
@@ -14461,7 +14611,7 @@ Transform:
   m_GameObject: {fileID: 2139557287}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5098, y: 0, z: 3.47}
+  m_LocalPosition: {x: 0.26149002, y: -1.26793, z: -2.73993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14487,7 +14637,7 @@ Transform:
   - {fileID: 19817957}
   - {fileID: 646039756}
   - {fileID: 1694730025}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1074562061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2140637890 stripped
 Transform:
@@ -14566,7 +14716,5 @@ SceneRoots:
   - {fileID: 2004399620}
   - {fileID: 1413640885}
   - {fileID: 1515996365}
-  - {fileID: 1351629184}
-  - {fileID: 2139557288}
-  - {fileID: 384380103}
-  - {fileID: 1986877312}
+  - {fileID: 1074562061}
+  - {fileID: 444552242}

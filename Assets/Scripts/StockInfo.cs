@@ -7,8 +7,11 @@ public class StockInfo
     public string name;
     public float price;
 
-    public enum StockType    // enum = list (from what I understand)
-    {
+    public StockObject stockObject;
+
+    public enum StockType    // enum = unmodified list (Use for named constants)
+    {                        // Here we are creating types of stock which will not be changed at any point, hence enum over list
+                             
         cereal, bigDrink, tubeChips, fruit, fruitLarge
     }
 
