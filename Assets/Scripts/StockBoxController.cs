@@ -12,7 +12,18 @@ public class StockBoxController : MonoBehaviour
     // Handles stock objects inside of the box
     public List<StockObject> stockInBox;
 
+    // Creates our test checkbox to fill a box in Unity
     public bool testFill;
+
+    // Reference to stock box's rigid body
+    public Rigidbody rigBod;
+
+    // Reference to stock box's collider
+    public Collider col;
+
+    public float moveSpeed = 5f; // Default value of 5
+
+    private bool isHeld;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,11 +34,20 @@ public class StockBoxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If the checkbox in Unity is checked, the test will fun
         if (testFill == true)
         {
             testFill = false;
 
+            // Sets up a stock box with default info
             SetupBox(info);
+        }
+
+        if(isHeld == true)
+        {
+            // See lines 29-33. Same code and has explaination if needed
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);   
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, moveSpeed * Time.deltaTime); 
         }
     }
 
@@ -95,5 +115,32 @@ public class StockBoxController : MonoBehaviour
                 stock.PlaceInBox();
             }
         }
+    }
+
+    // Sets the object's rigid body's kinematics to on
+    // Removes the object's collider
+    public void PlaceInBox()
+    {
+        rigBod.isKinematic = true;
+        col.enabled = false;
+    }
+
+    public void Pickup()
+    {
+        rigBod.isKinematic = true; // Sets objects rigid body's kinematics to true
+
+        col.enabled = false;
+
+        isHeld = true;
+
+    }
+
+    public void Release()
+    {
+        rigBod.isKinematic = false; // Removes object's rigid body's kinematics
+
+        col.enabled = true;
+
+        isHeld = false;
     }
 }

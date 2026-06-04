@@ -28,10 +28,12 @@ public class StockObject : MonoBehaviour
     {
         // If the object is placed, reset the vector and quaternion back to (0,0,0)
         // Ensures the object is in it's default state while placed
+        // Move Towards moves the object towards to location at a desired speed
+        // Slerp is the same thing but for rotation
         if (isPlaced == true)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);   // Resets object position to default
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, moveSpeed * Time.deltaTime);   // Resets object rotation to default
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);   // Slowly moves object to position and resets local position
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, moveSpeed * Time.deltaTime);   // Slowly moves object to position and resets local rotation
         }
         
     }

@@ -4,37 +4,53 @@ using UnityEngine.InputSystem; // Automatically added from InputActionReference
 
 public class PlayerController : MonoBehaviour
 {
-    //                  Public Variables
+    //                      ***Public Variables***
+
     // Public variables create an interactable toggle in Unity
+
+
+
+    //              ---Input Action References---
 
     // References Unity input system
     // Controls player movement
     public InputActionReference moveAction;
 
+    // Controls player jump
+    public InputActionReference jumpAction;
+    
+    // Controls player look
+    public InputActionReference lookAction;
+
     // References Character Controller system
     // Controls Unity's CharacterController
     public CharacterController charCon;
 
+
+
+    //                    ---Floats---
+
     // Controls player movement speed
     public float moveSpeed;
-
-    // Controls player jump
-    public InputActionReference jumpAction;
 
     // Controls player jump force
     public float jumpForce;
 
-    // Controls player look
-    public InputActionReference lookAction;
-
     // Controls player look speed
     public float lookSpeed;
 
-    // Reference to player camera
-    public Camera theCam;
-
     // Controls look limit
     public float minLookAngle, maxLookAngle;
+
+    // Controls the range a player can interact with an object in the game world
+    public float interactionRange;
+
+    // Controls our player throw force
+    public float throwForce;
+
+
+
+    //                  ---Layer Masks---
 
     // LayerMask references Layer system in Unity
     // Creates a dropdown in Unity to assign a layer to this variable
@@ -42,19 +58,30 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask whatIsShelf;
 
-    // Controls the range a player can interact with an object in the game world
-    public float interactionRange;
+    public LayerMask whatIsStockBox;
+
+    //                   ---Transforms---
 
     // References our hold point empty
     public Transform holdPoint;
 
-    // Controls our player throw force
-    public float throwForce;
+    public Transform boxHoldPoint;
+
+    //               ---Camera References---
+
+    // Reference to player camera
+    public Camera theCam;
+
+    //               ---Script References---
+
+    // Controls the box held by the player
+    public StockBoxController heldBox;
 
 
 
 
-    //                  Private Variables
+
+    //                        ***Private Variables***
     // Private variables don't show up in Unity Editor
 
     // Controls player 
@@ -68,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
 
 
+    //                          ***Main Script***
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -93,7 +121,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //                          Look
+        //                          ---Look---
+
         // Vector 2 = X and Y axis
         // Get look input
         Vector2 lookInput = lookAction.action.ReadValue<Vector2>();
@@ -116,7 +145,8 @@ public class PlayerController : MonoBehaviour
 
 
 
-        //                        Movement
+        //                       ---Movement---
+
         // Gets move input (WASD & Spacebar)
         Vector2 moveInput = moveAction.action.ReadValue<Vector2>();
 
@@ -152,14 +182,15 @@ public class PlayerController : MonoBehaviour
         charCon.Move(moveAmount * Time.deltaTime);
 
 
-        //                          Pickups
+        //                       ---Pickups---
+
         // Creates a raycast from the cameras viewport
         Ray ray = theCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit; // Local variable to control raycast hit
 
 
-        if (heldPickup == null) // Determines if an object is being held by the player
-        {                       // Only executes if player is NOT holding an object
+        if (heldPickup == null && heldBox == null) // Determines if an object is being held by the player
+        {                                          // Only executes if player is NOT holding an object
 
             // Checks to see if left mouse is clicked
             if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -173,12 +204,28 @@ public class PlayerController : MonoBehaviour
                     heldPickup.transform.SetParent(holdPoint);  // Sets the transform of the held pickup to be a parent of our hold point empty
                     heldPickup.Pickup();    // Executes pickup function
 
+                    return; // Makes sure we can't double pickup items
+                }
+
+                // If the ray hits an object within the interaction range and is a stock box, pickup that object
+                if(Physics.Raycast(ray, out hit, interactionRange, whatIsStockBox))
+                {
+
+                    // Same logic as above
+                    heldBox = hit.collider.GetComponent<StockBoxController>();
+                    heldBox.transform.SetParent(boxHoldPoint);
+                    heldBox.Pickup();
+
+                    return;
 
                 }
             }
 
+            // Checks to see if right mouse is clicked
+            // Allows taking items off shelves
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
+                // If the ray hits an item in the interaction range and that item is on a shelf, take that item
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
                 {
                     heldPickup = hit.collider.GetComponent<ShelfSpaceController>().GetStock();
@@ -191,8 +238,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            // Checks to see if the "e" key is pressed
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
+                // If the ray hits an object in the interaction range and that object is a shelf, open the price update interface
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
                 {
                     hit.collider.GetComponent<ShelfSpaceController>().StartPriceUpdate();
@@ -203,33 +252,55 @@ public class PlayerController : MonoBehaviour
         else    // Executes if a pickup is being held by the player
         {
 
-            // Checks to see if left mouse is clicked
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            // Only executes if the player is holding a pickup
+            if (heldPickup != null)
             {
-                // If the object hit by the ray is a shelf, place the held item 
-                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+
+                // Checks to see if left mouse is clicked
+                // Allows object placing
+                if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-
-                    hit.collider.GetComponent<ShelfSpaceController>().PlaceStock(heldPickup);
-
-                    if(heldPickup.isPlaced == true)
+                    // If the object hit by the ray is a shelf, place the held item 
+                    if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
                     {
-                        heldPickup = null;
+
+                        hit.collider.GetComponent<ShelfSpaceController>().PlaceStock(heldPickup);
+
+                        if (heldPickup.isPlaced == true)
+                        {
+                            heldPickup = null;
+                        }
+
                     }
 
                 }
 
+                // Checks to see if right mouse is clicked
+                // Allows object dropping
+                if (Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    heldPickup.Release();   // Remove kinematics
+                    heldPickup.rigBod.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
+
+                    heldPickup.transform.SetParent(null); // Removes hold point parent
+                    heldPickup = null; // Unassigns object from the player
+
+                }
             }
 
-            // Checks to see if right mouse is clicked
-            if (Mouse.current.rightButton.wasPressedThisFrame)
+            // Only executs when the player is holding a box
+            if (heldBox != null)
             {
-                heldPickup.Release();   // Remove kinematics
-                heldPickup.rigBod.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
+                // Checks to see if right mouse is clicked
+                if (Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    heldBox.Release();   // Remove kinematics
+                    heldBox.rigBod.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse); // Applies throw force to drop action 
 
-                heldPickup.transform.SetParent(null); // Removes hold point parent
-                heldPickup = null; // Unassigns object from the player
+                    heldBox.transform.SetParent(null); // Removes hold point parent
+                    heldBox = null; // Unassigns object from the player
 
+                }
             }
         }
 
