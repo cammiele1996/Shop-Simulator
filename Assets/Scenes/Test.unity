@@ -4096,6 +4096,7 @@ MonoBehaviour:
   info:
     name: 
     price: 0
+    currentPrice: 0
     stockObject: {fileID: 0}
     typeOfStock: 0
   objectsOnShelf: []
@@ -4520,71 +4521,88 @@ MonoBehaviour:
   foodInfo:
   - name: Apple
     price: 1.75
+    currentPrice: 0
     stockObject: {fileID: 379374499040087938, guid: edeb941c4e01bf64e9eab5c1deec2fec, type: 3}
     typeOfStock: 3
   - name: Eggplant
     price: 2
+    currentPrice: 0
     stockObject: {fileID: 5970602843498867990, guid: 5ace5e5346899f5428cf7c224c49603c, type: 3}
     typeOfStock: 3
   - name: Lemon
     price: 1
+    currentPrice: 0
     stockObject: {fileID: 6274309259186787596, guid: b805c2aca449d7a45978bb1aa71efee0, type: 3}
     typeOfStock: 3
   - name: Lettuce
     price: 4.25
+    currentPrice: 0
     stockObject: {fileID: 8999229006476214764, guid: fc817bd6c42bf12419fa2f34fa0701d6, type: 3}
     typeOfStock: 4
   - name: Pineapple
     price: 7.5
+    currentPrice: 0
     stockObject: {fileID: 1904699996125104852, guid: dbfd4616e79588d45858e6bbc72863be, type: 3}
     typeOfStock: 4
   - name: Half Watermelon
     price: 4.2
+    currentPrice: 0
     stockObject: {fileID: 7080979093415522952, guid: 1f57eb69273ad3646a834f2d7d84f868, type: 3}
     typeOfStock: 4
   - name: Whole Watermelon
     price: 8.72
+    currentPrice: 0
     stockObject: {fileID: 6215353841943874573, guid: 0db420fedec5da741805c6d318eaa335, type: 3}
     typeOfStock: 4
   produceInfo:
   - name: Cola Drink
     price: 3.5
+    currentPrice: 0
     stockObject: {fileID: 8801596300070336964, guid: a01b3ae9dbbf4464ca1fc76fe27aecb8, type: 3}
     typeOfStock: 1
   - name: Lime Drink
     price: 3
+    currentPrice: 0
     stockObject: {fileID: 3894530787167751511, guid: 60757f94a3022e348818a2c583b05a58, type: 3}
     typeOfStock: 1
   - name: Orange Drink
     price: 3
+    currentPrice: 0
     stockObject: {fileID: 2408076546941985552, guid: a6fa9a9b6a562d54b9338e4f0997e2bf, type: 3}
     typeOfStock: 1
   - name: Water Drink
     price: 3
+    currentPrice: 0
     stockObject: {fileID: 3250960561890966361, guid: cf209999e7bd54741a2c878e19b27f51, type: 3}
     typeOfStock: 1
   - name: Granola Cereal
     price: 5
+    currentPrice: 0
     stockObject: {fileID: 3448238701466486237, guid: fda6776c5072f5742a35d61995755b1e, type: 3}
     typeOfStock: 0
   - name: Rings Cereal
     price: 5
+    currentPrice: 0
     stockObject: {fileID: 4266453472209016458, guid: fca8591dd0e866c4088f74360ea246ea, type: 3}
     typeOfStock: 0
   - name: BBQ Chips
     price: 2
+    currentPrice: 0
     stockObject: {fileID: 6278568463303046182, guid: 1571d919994afc245831718dd74fef8d, type: 3}
     typeOfStock: 2
   - name: Cheddar Chips
     price: 2
+    currentPrice: 0
     stockObject: {fileID: 3210696404501222817, guid: cbc9713db63e6b740b202816e56d63b0, type: 3}
     typeOfStock: 2
   - name: Classic Chips
     price: 2
+    currentPrice: 0
     stockObject: {fileID: 4086335324769846748, guid: f1a2016258025c94ca1fceaa09909be5, type: 3}
     typeOfStock: 2
   - name: Onion Chips
     price: 2
+    currentPrice: 0
     stockObject: {fileID: 335141194966790903, guid: 44d8df2a1e64c1f45b49a1cc09b2f8fb, type: 3}
     typeOfStock: 2
 --- !u!4 &444552242
@@ -5244,7 +5262,7 @@ GameObject:
   - component: {fileID: 582911094}
   - component: {fileID: 582911093}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: Price InputField (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12202,6 +12220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
   updatePricePanel: {fileID: 1100901549}
+  basePriceText: {fileID: 1363705257}
+  currentPriceText: {fileID: 231680007}
+  priceInputField: {fileID: 582911093}
 --- !u!4 &1429096571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6378445450228162271, guid: cbc9713db63e6b740b202816e56d63b0, type: 3}
@@ -14556,7 +14577,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1801255820}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1413640886}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: ApplyPriceUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1801255820
 MonoBehaviour:
   m_ObjectHideFlags: 0

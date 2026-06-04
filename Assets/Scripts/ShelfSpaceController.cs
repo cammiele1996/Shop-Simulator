@@ -167,7 +167,7 @@ public class ShelfSpaceController : MonoBehaviour
     {
         if (objectsOnShelf.Count > 0)
         {
-            UIController.instance.OpenUpdatePrice();
+            UIController.instance.OpenUpdatePrice(info);
         }
     }
 }

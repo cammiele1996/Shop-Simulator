@@ -5,7 +5,7 @@ using UnityEngine;
 public class StockInfo
 {
     public string name;
-    public float price;
+    public float price, currentPrice;
 
     public StockObject stockObject;
 

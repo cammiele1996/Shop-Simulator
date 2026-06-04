@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class StockInfoController : MonoBehaviour
@@ -16,6 +17,14 @@ public class StockInfoController : MonoBehaviour
 
         allStock.AddRange(foodInfo);
         allStock.AddRange(produceInfo);
+
+        for (int i = 0; i < allStock.Count; i++)
+        {
+            if (allStock[i].currentPrice == 0)
+            {
+                allStock[i].currentPrice = allStock[i].price;
+            }
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
