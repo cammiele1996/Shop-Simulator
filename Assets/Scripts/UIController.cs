@@ -16,6 +16,8 @@ public class UIController : MonoBehaviour
     // Reference to player input field within price updater
     public TMP_InputField priceInputField;
 
+    public TMP_Text moneyText;
+
     // Reference to active stock object on shelf
     private StockInfo activeStockInfo;
 
@@ -92,5 +94,11 @@ public class UIController : MonoBehaviour
         StockInfoController.instance.UpdatePrice(activeStockInfo.name, activeStockInfo.currentPrice);
 
         CloseUpdatePrice(); // Closes the menu
+    }
+
+    public void UpdateMoney(float currentMoney)
+    {
+        moneyText.text = "$" + currentMoney.ToString("F2");
+
     }
 }

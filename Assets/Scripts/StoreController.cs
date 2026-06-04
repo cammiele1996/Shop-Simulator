@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class StoreController : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class StoreController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        UIController.instance.UpdateMoney(currentMoney);
     }
 
     // Update is called once per frame
@@ -42,6 +44,8 @@ public class StoreController : MonoBehaviour
     public void AddMoney(float amountToAdd)
     {
         currentMoney += amountToAdd;
+
+        UIController.instance.UpdateMoney(currentMoney);
     }
 
     public void SpendMoney(float amountToSpend)
@@ -52,6 +56,8 @@ public class StoreController : MonoBehaviour
         {
             currentMoney = 0;
         }
+
+        UIController.instance.UpdateMoney(currentMoney);
     }
 
     public bool CheckMoneyAvailable(float amountToCheck)
@@ -62,8 +68,6 @@ public class StoreController : MonoBehaviour
         {
             hasEnough = true;
         }
-
-
         return hasEnough;
 
     }
