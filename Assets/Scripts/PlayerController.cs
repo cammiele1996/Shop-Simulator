@@ -82,6 +82,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If an instance of the Update Price Panel exists, check to see if that instance is active
+        if(UIController.instance.updatePricePanel != null)
+        {
+            // If that instance is active, restart update loop
+            // If the Update screen is open, the rest of the player controller is voided until closed
+            if (UIController.instance.updatePricePanel.activeSelf == true)
+            {
+                return;
+            }
+        }
 
         //                          Look
         // Vector 2 = X and Y axis
@@ -178,6 +188,14 @@ public class PlayerController : MonoBehaviour
                         heldPickup.transform.SetParent(holdPoint);
                         heldPickup.Pickup(); 
                     }
+                }
+            }
+
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                {
+                    hit.collider.GetComponent<ShelfSpaceController>().StartPriceUpdate();
                 }
             }
         }

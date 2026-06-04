@@ -162,4 +162,12 @@ public class ShelfSpaceController : MonoBehaviour
 
         return objectToReturn;  // Returns the object to the player
     }
+
+    public void StartPriceUpdate()
+    {
+        if (objectsOnShelf.Count > 0)
+        {
+            UIController.instance.OpenUpdatePrice();
+        }
+    }
 }
