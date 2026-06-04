@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour
 
     public float crouchSpeed;
 
-    private bool isCrouching = false;
+    public float waitToPlaceStock;
+
 
 
 
@@ -101,6 +102,9 @@ public class PlayerController : MonoBehaviour
     // Controls pickup held by player
     private StockObject heldPickup;
 
+    private bool isCrouching = false;
+
+    private float placeStockCounter;
 
 
     //                          ***Main Script***
@@ -344,6 +348,27 @@ public class PlayerController : MonoBehaviour
                     if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
                     {
                         heldBox.PlaceStockOnShelf(hit.collider.GetComponent<ShelfSpaceController>());
+
+                        placeStockCounter = waitToPlaceStock;
+
+                    }
+                }
+
+                // isPressed = button held
+                if (Mouse.current.leftButton.isPressed)
+                {
+                    placeStockCounter -= Time.deltaTime;
+
+                    if (placeStockCounter <= 0)
+                    {
+                        if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                        {
+                            heldBox.PlaceStockOnShelf(hit.collider.GetComponent<ShelfSpaceController>());
+
+                            placeStockCounter = waitToPlaceStock;
+
+                        }
+
                     }
                 }
             }
