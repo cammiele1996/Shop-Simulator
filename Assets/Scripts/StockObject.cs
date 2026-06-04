@@ -69,4 +69,12 @@ public class StockObject : MonoBehaviour
 
         col.enabled = true;
     }
+
+    // Sets the object's rigid body's kinematics to on
+    // Removes the object's collider
+    public void PlaceInBox()
+    {
+        rigBod.isKinematic = true;
+        col.enabled = false;
+    }
 }
