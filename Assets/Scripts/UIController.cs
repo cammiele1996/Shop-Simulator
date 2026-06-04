@@ -65,7 +65,8 @@ public class UIController : MonoBehaviour
 
         activeStockInfo = stockToUpdate;    // Updates the stock items info
 
-        priceInputField.text = "";          // Starts each open with a default text box
+        priceInputField.text = stockToUpdate.currentPrice.ToString("F2");          // Starts each open with a default text box
+        priceInputField.textComponent.color = new Color(0f, 0f, 0f, 0.65f);
     }
 
     // Closes the price updater interface
@@ -80,6 +81,7 @@ public class UIController : MonoBehaviour
     // This function is called by the in-editor "Apply Changes" button
     public void ApplyPriceUpdate()
     {
+
         // Set the current price to the number set in the input field by player
         activeStockInfo.currentPrice = float.Parse(priceInputField.text);
 
