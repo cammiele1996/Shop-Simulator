@@ -48,6 +48,14 @@ public class PlayerController : MonoBehaviour
     // Controls our player throw force
     public float throwForce;
 
+    public float crouchHeight;
+
+    public float standHeight;
+
+    public float crouchSpeed;
+
+    private bool isCrouching = false;
+
 
 
     //                  ---Layer Masks---
@@ -181,6 +189,19 @@ public class PlayerController : MonoBehaviour
         // Sets Move in Character Controller
         charCon.Move(moveAmount * Time.deltaTime);
 
+        // Crouching
+        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        {
+            isCrouching = !isCrouching;
+        }
+
+        float targetHeight = isCrouching ? crouchHeight : standHeight;
+        Vector3 camPos = theCam.transform.localPosition;
+        camPos.y = Mathf.Lerp(camPos.y, targetHeight, crouchSpeed * Time.deltaTime);
+        theCam.transform.localPosition = camPos;
+
+
+
 
         //                       ---Pickups---
 
@@ -251,11 +272,7 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<ShelfSpaceController>().StartPriceUpdate();
                 }
-            }
             
-            // Checks to see if the "e" key is pressed
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
                 // If the ray hits an object in the interaction range and that object is a stock box, open/close it
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsStockBox))
                 {

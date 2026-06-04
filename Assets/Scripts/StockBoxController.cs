@@ -5,7 +5,7 @@ public class StockBoxController : MonoBehaviour
 {
     // Self Added
     public Vector3 flap1OpenRotation, flap2OpenRotation;
-    public Vector3 flap1ClosedRotation, flap2ClosedRotation;
+    private Vector3 flap1ClosedRotation, flap2ClosedRotation;
 
     // Reference to stock object type that is in the box
     public StockInfo info;
