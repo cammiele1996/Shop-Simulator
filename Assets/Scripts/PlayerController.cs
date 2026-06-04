@@ -133,6 +133,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(UIController.instance.buyMenuScreen != null)
+        {
+            if (UIController.instance.buyMenuScreen.activeSelf == true)
+            {
+                return;
+            }   
+        }
+
         //                          ---Look---
 
         // Vector 2 = X and Y axis

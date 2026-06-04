@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     // Reference to Price Panel
     public GameObject updatePricePanel;
 
+    public GameObject buyMenuScreen;
+
     // Reference to base and current text prices
     public TMP_Text basePriceText, currentPriceText;
 
@@ -36,6 +38,12 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            OpenCloseBuyMenu();
+        }
+
         // Self added
         // If the price panel is open, the player can hit enter to apply the settings
         // If the player hits escape, it will close the menu
@@ -100,5 +108,22 @@ public class UIController : MonoBehaviour
     {
         moneyText.text = "$" + currentMoney.ToString("F2");
 
+    }
+
+    public void OpenCloseBuyMenu()
+    {
+        if(buyMenuScreen.activeSelf == false)
+        {
+            buyMenuScreen.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+
+        }
+        else
+        {
+            buyMenuScreen.SetActive(false);
+
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
