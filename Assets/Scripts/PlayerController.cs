@@ -216,6 +216,11 @@ public class PlayerController : MonoBehaviour
                     heldBox.transform.SetParent(boxHoldPoint);
                     heldBox.Pickup();
 
+                    if(heldBox.isOpen == false)
+                    {
+                        heldBox.OpenClose();
+                    }
+
                     return;
 
                 }
@@ -245,6 +250,16 @@ public class PlayerController : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
                 {
                     hit.collider.GetComponent<ShelfSpaceController>().StartPriceUpdate();
+                }
+            }
+            
+            // Checks to see if the "e" key is pressed
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                // If the ray hits an object in the interaction range and that object is a stock box, open/close it
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsStockBox))
+                {
+                    hit.collider.GetComponent<StockBoxController>().OpenClose();
                 }
             }
         }
@@ -301,8 +316,21 @@ public class PlayerController : MonoBehaviour
                     heldBox = null; // Unassigns object from the player
 
                 }
-            }
-        }
 
+                if (Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    heldBox.OpenClose();
+                }
+
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                    {
+                        heldBox.PlaceStockOnShelf(hit.collider.GetComponent<ShelfSpaceController>());
+                    }
+                }
+            }
+
+        }
     }
 }

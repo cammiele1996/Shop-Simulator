@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class StockBoxController : MonoBehaviour
 {
+    // Self Added
+    public Vector3 flap1OpenRotation, flap2OpenRotation;
+    public Vector3 flap1ClosedRotation, flap2ClosedRotation;
+
     // Reference to stock object type that is in the box
     public StockInfo info;
 
@@ -23,12 +27,21 @@ public class StockBoxController : MonoBehaviour
 
     public float moveSpeed = 5f; // Default value of 5
 
+    public GameObject flap1, flap2;
+
+    public bool isOpen = false;
+
+
     private bool isHeld;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        flap1ClosedRotation = flap1.transform.localEulerAngles;
+        flap2ClosedRotation = flap2.transform.localEulerAngles;
+
     }
 
     // Update is called once per frame
@@ -142,5 +155,37 @@ public class StockBoxController : MonoBehaviour
         col.enabled = true;
 
         isHeld = false;
+    }
+
+    public void OpenClose()
+    {
+        if(isOpen)
+        {
+            flap1.transform.localEulerAngles = flap1ClosedRotation;
+            flap2.transform.localEulerAngles= flap2ClosedRotation;
+
+        }
+
+        else
+        {
+            flap1.transform.localEulerAngles = flap1OpenRotation;
+            flap2.transform.localEulerAngles = flap2OpenRotation;
+
+        }
+
+        isOpen = !isOpen;
+    }
+
+    public void PlaceStockOnShelf(ShelfSpaceController shelf)
+    {
+        if(stockInBox.Count > 0)
+        {
+            shelf.PlaceStock(stockInBox[stockInBox.Count - 1]);
+
+            if (stockInBox[stockInBox.Count - 1].isPlaced == true)
+            {
+                stockInBox.RemoveAt(stockInBox.Count - 1);
+            }
+        }
     }
 }
