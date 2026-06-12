@@ -51,7 +51,7 @@ public class BuyStockFrameController : MonoBehaviour
             StoreController.instance.SpendMoney(boxCost);
 
             // Spawns box at the 
-            Instantiate(boxToSpawn, StoreController.instance.stockSpawnPoint.position, Quaternion.identity);
+            Instantiate(boxToSpawn, StoreController.instance.stockSpawnPoint.position, Quaternion.identity).SetupBox(info);
         }
     }
 }

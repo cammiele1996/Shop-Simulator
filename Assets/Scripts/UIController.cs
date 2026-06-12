@@ -42,6 +42,15 @@ public class UIController : MonoBehaviour
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             OpenCloseBuyMenu();
+        } 
+
+        if (buyMenuScreen.activeSelf == true)
+        {
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                OpenCloseBuyMenu();
+            }
+
         }
 
         // Self added
