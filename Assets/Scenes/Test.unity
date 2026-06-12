@@ -13713,7 +13713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 466.43542, y: 188.9914}
+  m_AnchoredPosition: {x: 665, y: 343}
   m_SizeDelta: {x: 49.0739, y: 54.1464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795665273
@@ -13760,9 +13760,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1413640886}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenCloseBuyMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16601,6 +16601,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5671971148867497575, guid: d92501ae23c998141ab788b7b6dd1164, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8555663074717868298, guid: d92501ae23c998141ab788b7b6dd1164, type: 3}
+      propertyPath: testFill
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8555663074717868298, guid: d92501ae23c998141ab788b7b6dd1164, type: 3}
