@@ -155,8 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
-    name: Water Drink
+    name: Water Bottle
     price: 3
+    currentPrice: 0
+    stockObject: {fileID: 0}
     typeOfStock: 1
   moveSpeed: 5
   isPlaced: 0
