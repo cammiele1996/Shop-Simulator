@@ -1585,6 +1585,7 @@ GameObject:
   - component: {fileID: 8555663074717868298}
   - component: {fileID: 7759372010738215295}
   - component: {fileID: 3795095174815539482}
+  - component: {fileID: 7221676728631523190}
   m_Layer: 8
   m_Name: Box Of Stock
   m_TagString: Untagged
@@ -1734,8 +1735,6 @@ MonoBehaviour:
   rigBod: {fileID: 3795095174815539482}
   col: {fileID: 7759372010738215295}
   moveSpeed: 5
-  flap1: {fileID: 7012116613749815581}
-  flap2: {fileID: 1087525120603510144}
   isOpen: 0
 --- !u!65 &7759372010738215295
 BoxCollider:
@@ -1785,6 +1784,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &7221676728631523190
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311562587739399743}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05431df18b26d7d44a2374fd1dcacbd4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4357243201974558512
 GameObject:
   m_ObjectHideFlags: 0

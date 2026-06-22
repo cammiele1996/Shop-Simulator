@@ -27,7 +27,7 @@ public class StockBoxController : MonoBehaviour
 
     public float moveSpeed = 5f; // Default value of 5
 
-    public GameObject flap1, flap2;
+    private Animator animator;
 
     public bool isOpen = false;
 
@@ -39,8 +39,7 @@ public class StockBoxController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        flap1ClosedRotation = flap1.transform.localEulerAngles;
-        flap2ClosedRotation = flap2.transform.localEulerAngles;
+        animator = GetComponent<Animator>();
 
     }
 
@@ -159,21 +158,18 @@ public class StockBoxController : MonoBehaviour
 
     public void OpenClose()
     {
-        if(isOpen)
+        if (animator != null)
         {
-            flap1.transform.localEulerAngles = flap1ClosedRotation;
-            flap2.transform.localEulerAngles= flap2ClosedRotation;
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
+            if (stateInfo.normalizedTime < 1f && !animator.IsInTransition(0))
+            {
+                return;
+            }
+
+            isOpen = !isOpen;
+            animator.SetBool("isOpen", isOpen);
         }
-
-        else
-        {
-            flap1.transform.localEulerAngles = flap1OpenRotation;
-            flap2.transform.localEulerAngles = flap2OpenRotation;
-
-        }
-
-        isOpen = !isOpen;
     }
 
     public void PlaceStockOnShelf(ShelfSpaceController shelf)

@@ -308,6 +308,15 @@ public class PlayerController : MonoBehaviour
                     // Gets the 
                     hit.collider.GetComponent<StockBoxController>().OpenClose();
                 }
+
+                if (Physics.Raycast(ray,out hit, interactionRange, whatIsFurniture))
+                {
+                    FurnitureController fc = hit.collider.GetComponent<FurnitureController>();
+                    if (fc != null)
+                    {
+                        fc.ToggleDoor();
+                    }
+                }
             }
 
             // Checks to see if the "r" key is pressed
