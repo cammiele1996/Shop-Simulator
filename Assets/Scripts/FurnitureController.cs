@@ -7,6 +7,8 @@ public class FurnitureController : MonoBehaviour
 
     public Collider col;
 
+    public float price;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
