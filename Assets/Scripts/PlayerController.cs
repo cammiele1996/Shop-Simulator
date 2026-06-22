@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 
     // Public variables create an interactable toggle in Unity
 
-
-
     //              ---Input Action References---
 
     // References Unity input system
@@ -70,7 +68,7 @@ public class PlayerController : MonoBehaviour
     public StockBoxController heldBox;
 
     // Controls the furniture held by the player
-    public GameObject heldFurniture;
+    public FurnitureController heldFurniture;
 
 
     //                    ---Floats---
@@ -318,11 +316,13 @@ public class PlayerController : MonoBehaviour
                 // If the ray hits an object in the interaction range and that object is furniture, pickup the furniture
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsFurniture))
                 {
-                    heldFurniture = hit.transform.gameObject;
+                    heldFurniture = hit.transform.GetComponent<FurnitureController>();
 
                     heldFurniture.transform.SetParent(furniturePoint);
                     heldFurniture.transform.localPosition = Vector3.zero;
                     heldFurniture.transform.localRotation = Quaternion.identity;
+
+                    heldFurniture.MakePlaceable();
                 }
             }
         }
@@ -443,6 +443,9 @@ public class PlayerController : MonoBehaviour
                 if (Mouse.current.leftButton.wasPressedThisFrame || Keyboard.current.rKey.wasPressedThisFrame)
                 {
                     heldFurniture.transform.SetParent(null);
+
+                    heldFurniture.PlaceFurniture();
+
                     heldFurniture = null;
                 }
             }
