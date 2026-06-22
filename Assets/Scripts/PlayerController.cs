@@ -28,6 +28,51 @@ public class PlayerController : MonoBehaviour
 
 
 
+
+
+
+
+    //                  ---Layer Mask References---
+
+    // LayerMask references Layer system in Unity
+    // Creates a dropdown in Unity to assign a layer to this variable
+
+
+    public LayerMask whatIsStock;           // Stock
+
+    public LayerMask whatIsShelf;           // Shelf
+
+    public LayerMask whatIsStockBox;        // Stock Box
+
+    public LayerMask whatIsBin;             // Trash Bin
+
+    public LayerMask whatIsFurniture;       // Furniture
+
+    //                   ---Transform References---
+
+    // References our hold point emptys
+
+
+    public Transform holdPoint;             // Stock
+
+    public Transform boxHoldPoint;          // Box
+
+    public Transform furniturePoint;        // Furniture
+
+    //               ---Camera References---
+
+    // Reference to player camera
+    public Camera theCam;
+
+    //               ---Script References---
+
+    // Controls the box held by the player
+    public StockBoxController heldBox;
+
+    // Controls the furniture held by the player
+    public GameObject heldFurniture;
+
+
     //                    ---Floats---
 
     // Controls player movement speed
@@ -48,47 +93,17 @@ public class PlayerController : MonoBehaviour
     // Controls our player throw force
     public float throwForce;
 
+    // Controls our players crouch height (self added)
     public float crouchHeight;
 
+    // Controls our players standHeight (self added)
     public float standHeight;
 
+    // Controls our players crouch speed (self added)
     public float crouchSpeed;
 
+    // Controls the time in between each stock placement when holding button
     public float waitToPlaceStock;
-
-
-
-
-    //                  ---Layer Masks---
-
-    // LayerMask references Layer system in Unity
-    // Creates a dropdown in Unity to assign a layer to this variable
-    public LayerMask whatIsStock;
-
-    public LayerMask whatIsShelf;
-
-    public LayerMask whatIsStockBox;
-
-    public LayerMask whatIsBin;
-
-    //                   ---Transforms---
-
-    // References our hold point empty
-    public Transform holdPoint;
-
-    public Transform boxHoldPoint;
-
-    //               ---Camera References---
-
-    // Reference to player camera
-    public Camera theCam;
-
-    //               ---Script References---
-
-    // Controls the box held by the player
-    public StockBoxController heldBox;
-
-
 
 
 
@@ -124,8 +139,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //                          ---In-Game Menus---
         // If an instance of the Update Price Panel exists, check to see if that instance is active
-        if(UIController.instance.updatePricePanel != null)
+        if (UIController.instance.updatePricePanel != null)
         {
             // If that instance is active, restart update loop
             // If the Update screen is open, the rest of the player controller is voided until closed
@@ -217,14 +234,14 @@ public class PlayerController : MonoBehaviour
 
 
 
-        //                       ---Pickups---
+        //                       ---No Held Object---
 
         // Creates a raycast from the cameras viewport
         Ray ray = theCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit; // Local variable to control raycast hit
 
 
-        if (heldPickup == null && heldBox == null) // Determines if an object is being held by the player
+        if (heldPickup == null && heldBox == null && heldFurniture == null) // Determines if an object is being held by the player
         {                                          // Only executes if player is NOT holding an object
 
             // Checks to see if left mouse is clicked
@@ -290,11 +307,27 @@ public class PlayerController : MonoBehaviour
                 // If the ray hits an object in the interaction range and that object is a stock box, open/close it
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsStockBox))
                 {
+                    // Gets the 
                     hit.collider.GetComponent<StockBoxController>().OpenClose();
+                }
+            }
+
+            // Checks to see if the "r" key is pressed
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                // If the ray hits an object in the interaction range and that object is furniture, pickup the furniture
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsFurniture))
+                {
+                    heldFurniture = hit.transform.gameObject;
+
+                    heldFurniture.transform.SetParent(furniturePoint);
+                    heldFurniture.transform.localPosition = Vector3.zero;
+                    heldFurniture.transform.localRotation = Quaternion.identity;
                 }
             }
         }
 
+        //                       ---Held Object---
         else    // Executes if a pickup is being held by the player
         {
 
@@ -394,6 +427,23 @@ public class PlayerController : MonoBehaviour
                         }
 
                     }
+                }
+            }
+
+            // If player is holding furniture
+            if(heldFurniture != null) 
+            {
+                // Lock the y axis of the furniture to the ground
+                heldFurniture.transform.position = new Vector3(furniturePoint.position.x, 0f, furniturePoint.position.z);
+
+                // LookAt() allows an object to "look at" something else based on its anchor point and transform
+                heldFurniture.transform.LookAt(new Vector3(transform.position.x, 0f, transform.position.z));
+
+                // If left mouse or 'r' key is pressed, drop the object
+                if (Mouse.current.leftButton.wasPressedThisFrame || Keyboard.current.rKey.wasPressedThisFrame)
+                {
+                    heldFurniture.transform.SetParent(null);
+                    heldFurniture = null;
                 }
             }
 
