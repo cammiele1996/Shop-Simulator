@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask whatIsFurniture;       // Furniture
 
+
     //                   ---Transform References---
 
     // References our hold point emptys
@@ -296,11 +297,6 @@ public class PlayerController : MonoBehaviour
             // Checks to see if the "e" key is pressed
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
-                // If the ray hits an object in the interaction range and that object is a shelf, open the price update interface
-                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
-                {
-                    hit.collider.GetComponent<ShelfSpaceController>().StartPriceUpdate();
-                }
             
                 // If the ray hits an object in the interaction range and that object is a stock box, open/close it
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsStockBox))
@@ -319,6 +315,15 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            if (Mouse.current.middleButton.wasPressedThisFrame) 
+            {
+                // If the ray hits an object in the interaction range and that object is a shelf, open the price update interface
+                if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf))
+                {
+                    hit.collider.GetComponent<ShelfSpaceController>().StartPriceUpdate();
+                }
+            }
+
             // Checks to see if the "r" key is pressed
             if (Keyboard.current.rKey.wasPressedThisFrame)
             {
@@ -333,6 +338,18 @@ public class PlayerController : MonoBehaviour
 
                     heldFurniture.MakePlaceable();
                 }
+
+                //if (Physics.Raycast(ray, out hit, interactionRange, whatIsBin))
+                //{
+                //    heldBin = hit.transform.GetComponent<FurnitureController>();
+
+                //    heldBin.transform.SetParent(furniturePoint);
+                //    heldBin.transform.localPosition = Vector3.zero;
+                //    heldBin.transform.localRotation = Quaternion.identity;
+
+                //    heldBin.MakePlaceable();
+
+                //}
             }
         }
 
@@ -456,6 +473,12 @@ public class PlayerController : MonoBehaviour
                     heldFurniture.PlaceFurniture();
 
                     heldFurniture = null;
+
+                    //heldBin.transform.SetParent(null);
+
+                    //heldBin.PlaceFurniture();
+
+                    //heldBin = null;
                 }
             }
 

@@ -9,10 +9,43 @@ public class BuyFurnitureFrameController : MonoBehaviour
     public TMP_Text priceText;
 
 
+    public FurnitureController[] variants;
+
+    public Animator[] buttonAnimators;
+
+    private FurnitureController selectedVariant;
+
+    private int selectedIndex = 0;
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        priceText.text = "Price: $" + furniture.price.ToString("F2");
+        if (variants != null && variants.Length > 0)
+        {
+            selectedVariant = variants[0];
+            priceText.text = "Price: $" + furniture.price.ToString("F2");
+            
+        }
+        else if (furniture != null)
+        {
+            priceText.text = "Price: $" + furniture.price.ToString("F2");
+        }
+        
+    }
+
+    void OnEnable()
+    {
+        if (buttonAnimators != null && buttonAnimators.Length > 0)
+        {
+            foreach (Animator anim in buttonAnimators)
+            {
+                anim.SetBool("isSelected", false);
+            }
+
+            buttonAnimators[selectedIndex].SetBool("isSelected", true);
+        }
     }
 
     // Update is called once per frame
@@ -23,11 +56,28 @@ public class BuyFurnitureFrameController : MonoBehaviour
 
     public void BuyFurniture()
     {
-        if (StoreController.instance.CheckMoneyAvailable(furniture.price))
+        if (StoreController.instance.CheckMoneyAvailable(selectedVariant.price))
         {
-            StoreController.instance.SpendMoney(furniture.price);
+            StoreController.instance.SpendMoney(selectedVariant.price);
 
-            Instantiate(furniture, StoreController.instance.furnitureSpawnPoint.position, Quaternion.identity);
+            Instantiate(selectedVariant, StoreController.instance.furnitureSpawnPoint.position, Quaternion.identity);
         }
     }
+
+    public void SelectVariant(int index)
+    {
+        selectedIndex = index;
+        selectedVariant = variants[index];
+
+        foreach (Animator anim in buttonAnimators)
+        {
+            anim.SetBool("isSelected", false);
+          
+        }
+
+        buttonAnimators[index].SetBool("isSelected", true);
+        
+    }
+
+
 }

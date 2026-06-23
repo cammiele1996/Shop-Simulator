@@ -6,7 +6,7 @@ public class StoreController : MonoBehaviour
 {
     public static StoreController instance;
 
-    public float currentMoney = 1000f;
+    public float currentMoney = 100000f;
 
     public Transform stockSpawnPoint, furnitureSpawnPoint;
 
@@ -25,16 +25,16 @@ public class StoreController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.iKey.wasPressedThisFrame)
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
             AddMoney(100f);
         }
 
-        if (Keyboard.current.oKey.wasPressedThisFrame)
+        if (Keyboard.current.f2Key.wasPressedThisFrame)
         {
-            if(CheckMoneyAvailable(250f))
+            if(CheckMoneyAvailable(100f))
             {
-                SpendMoney(250f);
+                SpendMoney(100f);
             }
         }
 

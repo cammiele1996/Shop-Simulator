@@ -115,7 +115,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateMoney(float currentMoney)
     {
-        moneyText.text = "$" + currentMoney.ToString("F2");
+        moneyText.text = "$" + currentMoney.ToString("N2");
 
     }
 

@@ -18,6 +18,7 @@ public class FurnitureController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -44,10 +45,11 @@ public class FurnitureController : MonoBehaviour
     {
         if (animator != null)
         {
-
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-            if (stateInfo.normalizedTime < 1f && !animator.IsInTransition(0))
+            bool inClosedState = stateInfo.IsName("Closed");
+
+            if (!inClosedState && stateInfo.normalizedTime < 0.9f && !animator.IsInTransition(0))
             {
                 return;
             }
