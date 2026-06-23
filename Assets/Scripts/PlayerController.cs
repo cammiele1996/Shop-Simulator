@@ -338,18 +338,6 @@ public class PlayerController : MonoBehaviour
 
                     heldFurniture.MakePlaceable();
                 }
-
-                //if (Physics.Raycast(ray, out hit, interactionRange, whatIsBin))
-                //{
-                //    heldBin = hit.transform.GetComponent<FurnitureController>();
-
-                //    heldBin.transform.SetParent(furniturePoint);
-                //    heldBin.transform.localPosition = Vector3.zero;
-                //    heldBin.transform.localRotation = Quaternion.identity;
-
-                //    heldBin.MakePlaceable();
-
-                //}
             }
         }
 

@@ -40,11 +40,13 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Keyboard.current.tabKey.wasPressedThisFrame)
+        if (buyMenuScreen.activeSelf == false)
         {
-            OpenCloseBuyMenu();
-        } 
+            if (Keyboard.current.tabKey.wasPressedThisFrame)
+            {
+                OpenCloseBuyMenu();
+            }
+        }
 
         if (buyMenuScreen.activeSelf == true)
         {
@@ -132,7 +134,6 @@ public class UIController : MonoBehaviour
 
             if (LoginController.instance != null && !LoginController.instance.isLoggedIn)
             {
-                Debug.Log("isLoggedIn: " + LoginController.instance.isLoggedIn);
                 buyMenu.OpenLoginPanel();
             }
 

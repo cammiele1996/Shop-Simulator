@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LoginController : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class LoginController : MonoBehaviour
                          correctPassword = "Password";
 
     public TMP_InputField username, password;
+    public TMP_Text sessionExpired, incorrectCredentials;
 
-    private float sessionDuration = 20f, sessionTimer;
+    private float sessionDuration = 1200f, sessionTimer;
 
     public bool isLoggedIn;
 
@@ -32,10 +34,29 @@ public class LoginController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            if (username.isFocused)
+            {
+                password.Select();
+            }
+            else if (password.isFocused)
+            {
+                username.Select();
+            }
+           
+        }
+
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            TryLogin();
+        }
+
+
         if (isLoggedIn)
         {
             sessionTimer -= Time.deltaTime;
-            Debug.Log("Session timer: " + sessionTimer);
 
             if (sessionTimer <= 0f)
             {
@@ -48,12 +69,12 @@ public class LoginController : MonoBehaviour
 
     public void TryLogin()
     {
-        Debug.Log("TryLogin called. Username: " + username.text + " Password: " + password.text);
+        
         if (username.text == correctUsername && password.text == correctPassword)
         {
             isLoggedIn = true;
             sessionTimer = sessionDuration;
-            Debug.Log("isLoggedIn: " + LoginController.instance.isLoggedIn);
+            
 
             buyMenu.ToggleButtonState(true);
             buyMenu.OpenStockPanel();
@@ -63,6 +84,8 @@ public class LoginController : MonoBehaviour
         }
         else
         {
+            sessionExpired.gameObject.SetActive(false);
+            incorrectCredentials.gameObject.SetActive(true);
             password.text = "";
         }
     }
@@ -72,6 +95,9 @@ public class LoginController : MonoBehaviour
         isLoggedIn = false;
         buyMenu.ToggleButtonState(false);
         buyMenu.OpenLoginPanel();
+
+        sessionExpired.gameObject.SetActive(true);
+        incorrectCredentials.gameObject.SetActive(false);
 
     }
 }

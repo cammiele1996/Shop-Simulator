@@ -6,7 +6,7 @@ public class BuyMenuController : MonoBehaviour
 {
     public GameObject stockPanel, furniturePanel, loginPanel;
 
-    public Button stockButton, furnitureButton;
+    public Button stockButton, furnitureButton, logOutButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,10 +22,9 @@ public class BuyMenuController : MonoBehaviour
 
     public void ToggleButtonState(bool state)
     {
-
-        Debug.Log("ToggleButtonState called: " + state);
-        stockButton.interactable = state;
-        furnitureButton.interactable = state;
+        stockButton.gameObject.SetActive(state);
+        furnitureButton.gameObject.SetActive(state);
+        logOutButton.gameObject.SetActive(state);
     }
 
     public void OpenStockPanel()
