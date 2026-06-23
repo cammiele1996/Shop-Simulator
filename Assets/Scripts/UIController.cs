@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
 
     public GameObject buyMenuScreen;
 
+    public BuyMenuController buyMenu;
+
     // Reference to base and current text prices
     public TMP_Text basePriceText, currentPriceText;
 
@@ -121,11 +123,18 @@ public class UIController : MonoBehaviour
 
     public void OpenCloseBuyMenu()
     {
+
         if(buyMenuScreen.activeSelf == false)
         {
             buyMenuScreen.SetActive(true);
 
             Cursor.lockState = CursorLockMode.None;
+
+            if (LoginController.instance != null && !LoginController.instance.isLoggedIn)
+            {
+                Debug.Log("isLoggedIn: " + LoginController.instance.isLoggedIn);
+                buyMenu.OpenLoginPanel();
+            }
 
         }
         else

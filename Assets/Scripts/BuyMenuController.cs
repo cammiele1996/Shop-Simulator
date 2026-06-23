@@ -22,6 +22,8 @@ public class BuyMenuController : MonoBehaviour
 
     public void ToggleButtonState(bool state)
     {
+
+        Debug.Log("ToggleButtonState called: " + state);
         stockButton.interactable = state;
         furnitureButton.interactable = state;
     }
@@ -38,5 +40,12 @@ public class BuyMenuController : MonoBehaviour
         stockPanel.SetActive(false);
         furniturePanel.SetActive(true);
         loginPanel.SetActive(false);
+    }
+
+    public void OpenLoginPanel()
+    {
+        stockPanel.SetActive(false);
+        furniturePanel.SetActive(false);
+        loginPanel.SetActive(true);
     }
 }

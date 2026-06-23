@@ -11375,7 +11375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &553445494
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11485,8 +11485,8 @@ MonoBehaviour:
   stockPanel: {fileID: 1409713238}
   furniturePanel: {fileID: 750517416}
   loginPanel: {fileID: 1562780508}
-  stockButton: {fileID: 0}
-  furnitureButton: {fileID: 0}
+  stockButton: {fileID: 1003917164}
+  furnitureButton: {fileID: 91176649}
 --- !u!1 &554683353
 GameObject:
   m_ObjectHideFlags: 0
@@ -11500,7 +11500,7 @@ GameObject:
   - component: {fileID: 554683356}
   - component: {fileID: 554683355}
   m_Layer: 5
-  m_Name: InputField (TMP) (1)
+  m_Name: Password Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18126,7 +18126,7 @@ GameObject:
   - component: {fileID: 926827711}
   - component: {fileID: 926827710}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: Username Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28454,6 +28454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIController
   updatePricePanel: {fileID: 1100901549}
   buyMenuScreen: {fileID: 553445493}
+  buyMenu: {fileID: 553445499}
   basePriceText: {fileID: 1363705257}
   currentPriceText: {fileID: 231680007}
   priceInputField: {fileID: 582911093}
@@ -31104,6 +31105,7 @@ GameObject:
   - component: {fileID: 1562780512}
   - component: {fileID: 1562780511}
   - component: {fileID: 1562780510}
+  - component: {fileID: 1562780514}
   m_Layer: 5
   m_Name: Login Panel
   m_TagString: Untagged
@@ -31205,6 +31207,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562780508}
   m_CullTransparentMesh: 1
+--- !u!114 &1562780514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562780508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cded4c064023a945a3c94067e613233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoginController
+  username: {fileID: 926827710}
+  password: {fileID: 554683355}
+  isLoggedIn: 0
+  buyMenu: {fileID: 553445499}
 --- !u!4 &1568373507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6378445450228162271, guid: cbc9713db63e6b740b202816e56d63b0, type: 3}
@@ -39796,7 +39814,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2018854596}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1562780514}
+        m_TargetAssemblyTypeName: LoginController, Assembly-CSharp
+        m_MethodName: TryLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2018854596
 MonoBehaviour:
   m_ObjectHideFlags: 0
